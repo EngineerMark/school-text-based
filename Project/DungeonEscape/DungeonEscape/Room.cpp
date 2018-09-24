@@ -15,7 +15,6 @@ Room::Room()
 	}
 }
 
-
 Room::~Room()
 {
 }
