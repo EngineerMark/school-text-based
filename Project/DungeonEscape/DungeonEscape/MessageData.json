@@ -1,0 +1,18 @@
+{
+  "returnMessages": {
+    "welcome": "Welcome to the Dungeon. You fell asleep and found yourself here.\nThe only way out is to explore the rooms towards the exit.\nEach door you check out counts as a step.",
+    "exit": "Stopping and exiting the game",
+    "doorSelection": "You selected door %d",
+    "doorNonExistant": "Door %d does not exist. Please pick on that actually exists.",
+    "nextRoom": "You entered the next room in the dungeon.",
+    "stepCount": "Current step count: %d",
+    "help": "These are the available commands in the game:\n{n} - A number to select a door\nsteps - Check out how many steps you have spent on the current dungeon\nquit - stop and exit the game\nhelp - this message",
+    "blockedDoor": "This door is blocked from the other side or is a mimick. Nonetheless, you cannot go past it.",
+    "commandNonExistant": "This command does not exist"
+  },
+  "commands": {
+    "exit": "quit",
+    "stps": "steps",
+    "hlp": "help"
+  }
+}

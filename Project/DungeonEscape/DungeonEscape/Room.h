@@ -1,12 +1,13 @@
 #pragma once
-#include <list>
+#include <vector>
 #include "Door.h"
 class Room
 {
 public:
 	Room();
 	~Room();
-	std::list<Door> doors;
+	std::vector<Door> doors;
 	void DoorsMessage();
+	void RebuildRoom();
 };
 

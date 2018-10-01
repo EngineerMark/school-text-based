@@ -14,6 +14,5 @@ Random::~Random()
 }
 
 int Random::RandomInt(int max) {
-	std::srand(std::time(nullptr));
 	return (std::rand() % max) + 1;
 }

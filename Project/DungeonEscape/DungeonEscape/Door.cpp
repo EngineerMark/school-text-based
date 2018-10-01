@@ -2,11 +2,13 @@
 #include "Door.h"
 #include "Random.h"
 
+#include <iostream>
+
 
 Door::Door()
 {
-	int randomizeRoomContaining = Random::RandomInt(15);
-	if (randomizeRoomContaining < 3) {
+	int randomizeRoomContaining = Random::RandomInt(2);
+	if (randomizeRoomContaining == 1) {
 		HasRoom = true;
 	}
 }
