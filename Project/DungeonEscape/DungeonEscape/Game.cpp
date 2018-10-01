@@ -23,8 +23,10 @@ picojson::value returnMessages = v.get("returnMessages");
 picojson::value commands = v.get("commands");
 
 const char* jsonToChar(picojson::value value) {
-	const char* ret = value.to_str().c_str();
-	return ret;
+	char buffer[1024];
+	sprintf_s(buffer, value.to_str().c_str());
+	//buffer = value.to_str().c_str();
+	return buffer;
 }
 
 Game::Game()
