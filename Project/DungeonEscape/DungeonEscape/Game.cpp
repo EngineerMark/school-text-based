@@ -33,7 +33,6 @@ Game::Game()
 {
 	Quit = false;
 	room = Room();
-
 	Message::Send(returnMessages.get("welcome").to_str().c_str());
 }
 
