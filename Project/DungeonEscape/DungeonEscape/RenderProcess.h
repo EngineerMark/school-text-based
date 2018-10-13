@@ -15,6 +15,7 @@ public:
 	VkInstance instance;
 	RenderProcess();
 	~RenderProcess();
+	void Loop() override;
 	void OnUpdate(float deltaTime) override;
 	void OnInit() override;
 	void OnAbort() override;

@@ -1,7 +1,6 @@
 #pragma once
 #include <thread>
-
-typedef std::thread Thread;
+//#include "Thread.h"
 
 enum ProcessState {
 	STATE_UNINITIALISED,
@@ -18,11 +17,12 @@ class Process
 private:
 	ProcessState state;
 	//friend class ProcessManager;
+protected:
+	std::thread* thread;
 public:
-	Thread* processThread;
-
+	virtual void Loop() {};
 	virtual void OnUpdate(float deltaTime) = 0;
-	virtual void OnInit() { state = STATE_RUNNING; };
+	virtual void OnInit() { state = STATE_PAUSED; };
 	virtual void OnAbort() { state = STATE_ABORT; };
 
 	ProcessState GetState() const { return state; };

@@ -76,15 +76,41 @@ RenderProcess::RenderProcess()
 
 RenderProcess::~RenderProcess()
 {
+	thread->join();
 	cleanup();
+}
+
+
+void RenderProcess::OnAbort()
+{
+	cleanup();
+}
+
+void RenderProcess::Loop() {
+	Process::Loop();
+	initWindow();
+	initVulkan();
+	while (IsAlive()) {
+		if (IsPaused())
+			continue;
+		if (IsDead())
+			break;
+
+		//std::cout << "RenderProcess" << std::endl;
+		loop();
+	}
+}
+
+void RenderProcess::OnUpdate(float deltaTime)
+{
+	SetState(STATE_RUNNING);
 }
 
 void RenderProcess::OnInit()
 {
 	Process::OnInit();
 	try {
-		initWindow();
-		initVulkan();
+		thread = new std::thread(&RenderProcess::Loop, this);
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << std::endl;
@@ -93,18 +119,3 @@ void RenderProcess::OnInit()
 		return;
 	}
 }
-
-void RenderProcess::OnAbort()
-{
-	cleanup();
-}
-
-void RenderProcess::OnUpdate(float deltaTime)
-{
-	loop();
-	//std::cout << "TESTING LOOOOOOOOOOOOOOOP";
-
-	//return EXIT_SUCCESS;
-	return;
-}
-
