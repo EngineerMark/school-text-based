@@ -16,7 +16,18 @@ ProcessManager::ProcessManager() {
 }
 
 ProcessManager::~ProcessManager() {
-
+	if (processList->size() > 0) {
+		ProcessList::iterator it = processList->begin();
+		ProcessList::iterator end = processList->end();
+		while (it != end) {
+			StrongProcessPtr p = (*it);
+			p->OnAbort();
+			SAFE_DELETE(p->thread);
+			it++;
+		}
+	}
+	processList->empty();
+	SAFE_DELETE(processList);
 }
 
 void ProcessManager::RegisterProcess(StrongProcessPtr process)
@@ -25,7 +36,6 @@ void ProcessManager::RegisterProcess(StrongProcessPtr process)
 	process->OnInit();
 	processList->push_back(process);
 }
-
 
 unsigned int ProcessManager::UpdateProcesses(float deltaTime)
 {
@@ -37,11 +47,12 @@ unsigned int ProcessManager::UpdateProcesses(float deltaTime)
 	while (processList->end() != it) {
 		if (_kbhit()) {
 			StrongProcessPtr p = (*it);
-			p->OnUpdate(0);
+			if ((*it)->IsAlive()) {
+				p->OnUpdate(0);
+			}
 			++it;
 		}
 	}
-
 	return ((successCount << 16) | failCount);
 }
 
@@ -51,4 +62,12 @@ int ProcessManager::GetProcessCount() {
 
 void ProcessManager::AbortAllProcesses(bool immediately)
 {
+	if (immediately) {
+		ProcessList::iterator it = processList->begin();
+		ProcessList::iterator end = processList->end();
+		while (processList->end() != it) {
+			(*it)->OnAbort();
+			++it;
+		}
+	}
 }

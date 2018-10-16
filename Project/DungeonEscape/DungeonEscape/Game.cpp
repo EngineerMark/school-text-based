@@ -42,7 +42,7 @@ Game::~Game()
 }
 
 void Game::Loop() {
-	while (!Quit) {
+	//while (!Quit) {
 		char buffer[100];
 		char msg[100];
 		Message::Send(divider);
@@ -50,7 +50,6 @@ void Game::Loop() {
 		if (strcmp(buffer, commands.get("exit").to_str().c_str()) == 0) {
 			Message::Send(returnMessages.get("exit").to_str().c_str());
 			QuitGame();
-			break;
 		}
 		else if (isdigit(buffer[0])) {
 			int n = buffer[0] - 48;
@@ -82,5 +81,5 @@ void Game::Loop() {
 		else {
 			Message::Send(returnMessages.get("commandNonExistant").to_str().c_str());
 		}
-	}
+	//}
 }

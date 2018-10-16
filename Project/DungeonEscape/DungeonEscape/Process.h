@@ -17,13 +17,12 @@ class Process
 private:
 	ProcessState state;
 	//friend class ProcessManager;
-protected:
-	std::thread* thread;
 public:
+	std::thread* thread;
 	virtual void Loop() {};
 	virtual void OnUpdate(float deltaTime) = 0;
 	virtual void OnInit() { state = STATE_PAUSED; };
-	virtual void OnAbort() { state = STATE_ABORT; };
+	virtual void OnAbort() { state = STATE_ABORT; SAFE_DELETE(thread); };
 
 	ProcessState GetState() const { return state; };
 	void SetState(ProcessState state) { this->state = state; };

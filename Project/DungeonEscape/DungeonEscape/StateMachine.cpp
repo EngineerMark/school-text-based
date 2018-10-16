@@ -1,20 +1,7 @@
 #include "pch.h"
+#include <iostream>
 #include "Debug.h"
 #include "StateMachine.h"
-
-template <class T>
-StateMachine<T>::StateMachine(T owner)
-{
-	this->owner = owner;
-	previousState = nullptr;
-	currentState = nullptr;
-}
-
-template <class T>
-StateMachine<T>::~StateMachine()
-{
-
-}
 
 template <class T>
 void StateMachine<T>::Update() {

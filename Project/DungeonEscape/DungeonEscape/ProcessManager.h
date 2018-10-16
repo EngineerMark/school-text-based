@@ -10,6 +10,7 @@ typedef std::list<StrongProcessPtr> ProcessList;
 class ProcessManager
 {
 public:
+	static bool isRunning;
 	ProcessList* processList;
 	ProcessManager();
 	~ProcessManager();

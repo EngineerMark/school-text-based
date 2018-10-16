@@ -13,6 +13,7 @@ InputProcess::InputProcess()
 InputProcess::~InputProcess()
 {
 	thread->join();
+	SAFE_DELETE(game);
 }
 
 void InputProcess::Loop() {
@@ -23,12 +24,16 @@ void InputProcess::Loop() {
 		if (IsDead())
 			break;
 
-		char buffer[100];
-		//std::cout << "InputProcess" << std::endl;
+		//char buffer[100];
+		////std::cout << "InputProcess" << std::endl;
 
-		std::cin >> buffer;
+		//std::cin >> buffer;
 
-		std::cout << buffer << " - WOW WORKS!" << std::endl;
+		//std::cout << buffer << " - WOW WORKS!" << std::endl;
+		game->Loop();
+		if (game->IsQuitting()) {
+			OnAbort();
+		}
 	}
 }
 
@@ -40,6 +45,7 @@ void InputProcess::OnUpdate(float deltaTime)
 void InputProcess::OnInit()
 {
 	Process::OnInit();
+	game = new Game();
 	/*Function* func = OnUpdate;
 	Thread* tprocessThread = new Thread(func);*/
 	thread = new std::thread(&InputProcess::Loop,this);

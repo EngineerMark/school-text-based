@@ -76,7 +76,6 @@ RenderProcess::RenderProcess()
 
 RenderProcess::~RenderProcess()
 {
-	thread->join();
 	cleanup();
 }
 
