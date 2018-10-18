@@ -7,6 +7,13 @@
 class RenderProcess: public Process
 {
 private:
+	VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
+	VkDevice device;
+	VkQueue graphicsQueue;
+	void CreateInstance();
+	void setupDebugCallback();
+	void findPhysicalDevice();
+	void createLogicalDevice();
 	void initWindow();
 	void initVulkan();
 	void loop();

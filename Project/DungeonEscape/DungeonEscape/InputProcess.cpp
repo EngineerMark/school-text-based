@@ -6,14 +6,12 @@
 
 InputProcess::InputProcess()
 {
-	
+	SetProcessType(PROCESS_INPUT);
 }
 
 
 InputProcess::~InputProcess()
 {
-	thread->join();
-	SAFE_DELETE(game);
 }
 
 void InputProcess::Loop() {
@@ -31,10 +29,10 @@ void InputProcess::Loop() {
 
 		//std::cout << buffer << " - WOW WORKS!" << std::endl;
 		game->Loop();
-		if (game->IsQuitting()) {
-			OnAbort();
-		}
+		if (game->IsQuitting() || GetState()==STATE_SUCCEEDED)
+			break;
 	}
+	SetState(STATE_SUCCEEDED);
 }
 
 void InputProcess::OnUpdate(float deltaTime)

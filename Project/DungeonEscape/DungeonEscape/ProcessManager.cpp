@@ -22,12 +22,10 @@ ProcessManager::~ProcessManager() {
 		while (it != end) {
 			StrongProcessPtr p = (*it);
 			p->OnAbort();
-			SAFE_DELETE(p->thread);
 			it++;
 		}
 	}
 	processList->empty();
-	SAFE_DELETE(processList);
 }
 
 void ProcessManager::RegisterProcess(StrongProcessPtr process)
@@ -45,13 +43,21 @@ unsigned int ProcessManager::UpdateProcesses(float deltaTime)
 	ProcessList::iterator it = processList->begin();
 	ProcessList::iterator end = processList->end();
 	while (processList->end() != it) {
-		if (_kbhit()) {
-			StrongProcessPtr p = (*it);
-			if ((*it)->IsAlive()) {
-				p->OnUpdate(0);
+		StrongProcessPtr p = (*it);
+		if (p->thread == NULL)
+			continue;
+
+		if (p->IsDone()) {
+			cout << p << " closed thread" << endl;
+			if (p->GetProcessType() == PROCESS_INPUT) {
+				AbortAllProcesses(false);
 			}
-			++it;
 		}
+		else if (p->IsAlive()) {
+			p->OnUpdate(0);
+			//cout << (*it) << " updated" << endl;
+		}
+		++it;
 	}
 	return ((successCount << 16) | failCount);
 }
@@ -62,11 +68,24 @@ int ProcessManager::GetProcessCount() {
 
 void ProcessManager::AbortAllProcesses(bool immediately)
 {
+	ProcessList::iterator it = processList->begin();
+	ProcessList::iterator end = processList->end();
 	if (immediately) {
-		ProcessList::iterator it = processList->begin();
-		ProcessList::iterator end = processList->end();
 		while (processList->end() != it) {
+			if ((*it)->thread == NULL)
+				continue;
 			(*it)->OnAbort();
+			processList->remove((*it));
+			++it;
+		}
+	}
+	else {
+		while (processList->end() != it) {
+			if ((*it)->thread == NULL)
+				continue;
+			(*it)->SetState(STATE_SUCCEEDED);
+			processList->remove((*it));
+
 			++it;
 		}
 	}

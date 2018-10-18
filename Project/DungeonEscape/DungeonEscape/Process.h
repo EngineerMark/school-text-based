@@ -12,10 +12,17 @@ enum ProcessState {
 	STATE_ABORT,
 };
 
+
+enum ProcessType {
+	PROCESS_INPUT,
+	PROCESS_VULKAN
+};
+
 class Process
 {
 private:
 	ProcessState state;
+	ProcessType processType;
 	//friend class ProcessManager;
 public:
 	std::thread* thread;
@@ -26,6 +33,9 @@ public:
 
 	ProcessState GetState() const { return state; };
 	void SetState(ProcessState state) { this->state = state; };
+
+	ProcessType GetProcessType() const { return processType; };
+	void SetProcessType(ProcessType type) { this->processType = type; };
 
 	bool IsAlive() const { return state == STATE_RUNNING || state == STATE_PAUSED; };
 	bool IsDead() const { return state == STATE_REMOVED || state == STATE_FAILED || state == STATE_ABORT; };

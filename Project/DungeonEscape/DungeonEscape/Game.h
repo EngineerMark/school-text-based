@@ -7,7 +7,7 @@ class Game
 private:
 	bool Quit;
 	const char* divider = "------------------------------------------------------------------";
-	StateMachine<Game> stateMachine;
+	//StateMachine<Game> stateMachine;
 public:
 	bool IsQuitting() { return Quit; };
 	void QuitGame() { Quit = true; };
