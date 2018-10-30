@@ -3,17 +3,17 @@
 #include <GLFW/glfw3.h>
 
 #include <vulkan/vulkan.h>
+#include <set>
+#include <optional>
+#include <iostream>
+#include <stdexcept>
+#include <functional>
+#include <cstdlib>
 #include "Process.h"
+
 class RenderProcess: public Process
 {
 private:
-	VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
-	VkDevice device;
-	VkQueue graphicsQueue;
-	void CreateInstance();
-	void setupDebugCallback();
-	void findPhysicalDevice();
-	void createLogicalDevice();
 	void initWindow();
 	void initVulkan();
 	void loop();

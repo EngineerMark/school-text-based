@@ -69,7 +69,10 @@
     <ClInclude Include="List.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StateGameExample.h">
+    <ClInclude Include="StateIntroduction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -125,7 +128,10 @@
     <ClCompile Include="List.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StateGameExample.cpp">
+    <ClCompile Include="StateIntroduction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MessageData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

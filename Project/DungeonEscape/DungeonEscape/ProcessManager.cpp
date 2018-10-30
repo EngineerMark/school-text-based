@@ -6,9 +6,7 @@
 #include "ProcessManager.h"
 #include "RenderProcess.h"
 
-using namespace std;
-
-typedef list<StrongProcessPtr> ProcessList;
+typedef std::list<StrongProcessPtr> ProcessList;
 //ProcessList processList;
 
 ProcessManager::ProcessManager() {
@@ -30,7 +28,7 @@ ProcessManager::~ProcessManager() {
 
 void ProcessManager::RegisterProcess(StrongProcessPtr process)
 {
-	cout << "thread created" << endl;
+	//cout << "thread created" << endl;
 	process->OnInit();
 	processList->push_back(process);
 }
@@ -48,7 +46,6 @@ unsigned int ProcessManager::UpdateProcesses(float deltaTime)
 			continue;
 
 		if (p->IsDone()) {
-			cout << p << " closed thread" << endl;
 			if (p->GetProcessType() == PROCESS_INPUT) {
 				AbortAllProcesses(false);
 			}

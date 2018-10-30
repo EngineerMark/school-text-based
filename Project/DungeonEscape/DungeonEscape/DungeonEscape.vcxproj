@@ -167,6 +167,7 @@
     <ClInclude Include="InputProcess.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Message.h" />
+    <ClInclude Include="MessageData.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Process.h" />
     <ClInclude Include="ProcessManager.h" />
@@ -174,7 +175,7 @@
     <ClInclude Include="RenderProcess.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="State.h" />
-    <ClInclude Include="StateGameExample.h" />
+    <ClInclude Include="StateIntroduction.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Window.h" />
@@ -188,6 +189,7 @@
     <ClCompile Include="InputProcess.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="Message.cpp" />
+    <ClCompile Include="MessageData.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -199,7 +201,7 @@
     <ClCompile Include="RenderProcess.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="State.cpp" />
-    <ClCompile Include="StateGameExample.cpp" />
+    <ClCompile Include="StateIntroduction.cpp" />
     <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Window.cpp" />

@@ -2,7 +2,7 @@
 #include <iostream>
 #include "InputProcess.h"
 #include "Process.h"
-
+#include "Debug.h"
 
 InputProcess::InputProcess()
 {
@@ -33,6 +33,7 @@ void InputProcess::Loop() {
 			break;
 	}
 	SetState(STATE_SUCCEEDED);
+	Debug::Log("Input Thread loop finished");
 }
 
 void InputProcess::OnUpdate(float deltaTime)
