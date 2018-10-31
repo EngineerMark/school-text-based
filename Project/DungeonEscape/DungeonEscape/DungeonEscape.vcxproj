@@ -164,6 +164,7 @@
     <ClInclude Include="Door.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameProgression.h" />
     <ClInclude Include="InputProcess.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Message.h" />
@@ -200,7 +201,6 @@
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="RenderProcess.cpp" />
     <ClCompile Include="Room.cpp" />
-    <ClCompile Include="State.cpp" />
     <ClCompile Include="StateIntroduction.cpp" />
     <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="Time.cpp" />

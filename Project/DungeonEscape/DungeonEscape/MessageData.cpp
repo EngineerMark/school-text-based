@@ -14,7 +14,7 @@ MessageData::MessageData(std::string file)
 	messages = v.get("returnMessages");
 	commands = v.get("commands");
 
-	SAFE_DELETE(messageBuffer);
+	//SAFE_DELETE(messageBuffer);
 }
 
 

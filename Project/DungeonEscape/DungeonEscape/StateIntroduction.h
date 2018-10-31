@@ -1,10 +1,14 @@
 #pragma once
-#include "Game.h"
 #include "State.h"
-class StateIntroduction
+#include "Game.h"
+
+class StateIntroduction: public State<Game>
 {
 public:
-	StateIntroduction();
+	MessageData* messages;
+	StateIntroduction(MessageData* msg);
 	~StateIntroduction();
+	void Enter(Game* game) override;
+	void Execute(Game* game) override;
+	void Exit(Game* game) override;
 };
-

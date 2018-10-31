@@ -9,11 +9,13 @@
     "help": "These are the available commands in the game:\n{n} - A number to select a door\nsteps - Check out how many steps you have spent on the current dungeon\nquit - stop and exit the game\nhelp - this message",
     "blockedDoor": "This door is blocked from the other side or is a mimick. Nonetheless, you cannot go past it.",
     "commandNonExistant": "This command does not exist",
-    "difficultyChoice": "Pick a difficulty to play:\n1 - 15 Rooms\n2 - 20 Room\n3 - 25 Rooms"
+    "difficultyChoice": "Pick a difficulty to play:\n1 - 15 Rooms\n2 - 20 Room\n3 - 25 Rooms",
+    "gameStarted": "You started the game, success."
   },
   "commands": {
     "exit": "quit",
     "stps": "steps",
-    "hlp": "help"
+    "hlp": "help",
+    "start": "start"
   }
 }

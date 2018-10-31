@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Debug.h"
 #include "State.h"
+
 template <class T> class StateMachine
 {
 private:
@@ -9,17 +10,43 @@ private:
 	State<T> *previousState;
 	State<T> *currentState;
 public:
-	StateMachine()
+	StateMachine(T* t)
 	{
+		this->t = t;
 		currentState = nullptr;
 		previousState = nullptr;
-		Debug::Log("statemachine created");
 	};
-	~StateMachine(){};
 
-	void ChangeState(State<T>* newState);
-	void Update();
-	State<T> GetState();
-	void ReturnToPreviousState();
+	~StateMachine()
+	{
+		SAFE_DELETE(t);
+	};
+
+	void ChangeState(State<T>* newState) {
+		if (!newState) {
+			Debug::ErrorLog("StateMachine: newState doesn't exist");
+			return;
+		}
+		if (previousState != nullptr) {
+			currentState->Exit(t);
+			previousState = nullptr;
+			previousState = currentState;
+		}
+		currentState = newState;
+		currentState->Enter(t);
+	};
+
+	void Update() {
+		if (currentState != nullptr)
+			currentState->Execute(t);
+	};
+
+	State<T> GetState() {
+		return currentState;
+	};
+
+	void ReturnToPreviousState() {
+		ChangeState(previousState);
+	}
 };
 
