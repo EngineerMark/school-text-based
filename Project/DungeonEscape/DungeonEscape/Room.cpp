@@ -1,8 +1,5 @@
 #include "pch.h"
 #include "Room.h"
-#include "Random.h"
-
-#include <iostream>
 
 Room::Room()
 {
@@ -18,12 +15,15 @@ void Room::DoorsMessage() {
 }
 
 void Room::RebuildRoom() {
+	possible = false;
 	doors = std::vector<Door>();
 	int doorAmount = Random::RandomInt(3) + 2;
 	for (int i = 0; i < doorAmount; i++)
 	{
 		Door door;
 		doors.push_back(door);
+		if (door.HasRoom) {
+			possible = true;
+		}
 	}
-	DoorsMessage();
 }

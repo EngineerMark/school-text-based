@@ -28,7 +28,6 @@ public:
 	Game();
 	~Game();
 	void Loop();
-	int steps = 0;
 	Room room;
 };
 

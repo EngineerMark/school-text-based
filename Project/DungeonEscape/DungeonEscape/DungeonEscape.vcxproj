@@ -176,8 +176,10 @@
     <ClInclude Include="RenderProcess.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="State.h" />
+    <ClInclude Include="StateGameOver.h" />
     <ClInclude Include="StateIntroduction.h" />
     <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="StateRoom.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
@@ -201,8 +203,9 @@
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="RenderProcess.cpp" />
     <ClCompile Include="Room.cpp" />
+    <ClCompile Include="StateGameOver.cpp" />
     <ClCompile Include="StateIntroduction.cpp" />
-    <ClCompile Include="StateMachine.cpp" />
+    <ClCompile Include="StateRoom.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>

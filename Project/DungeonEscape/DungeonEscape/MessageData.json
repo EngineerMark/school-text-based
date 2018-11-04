@@ -10,7 +10,9 @@
     "blockedDoor": "This door is blocked from the other side or is a mimick. Nonetheless, you cannot go past it.",
     "commandNonExistant": "This command does not exist",
     "difficultyChoice": "Pick a difficulty to play:\n1 - 15 Rooms\n2 - 20 Room\n3 - 25 Rooms",
-    "gameStarted": "You started the game, success."
+    "gameStarted": "You started the game, success.",
+    "introduction": "Welcome to Dungeon Escape. Your mission is to escape the dungeon you are currently in.\nType 'start' to continue and play.",
+    "gameover": "It seems there is no way out of the dungeon, and you died from hunger. Better luck next time!"
   },
   "commands": {
     "exit": "quit",

@@ -34,6 +34,7 @@ public:
 		}
 		currentState = newState;
 		currentState->Enter(t);
+		Debug::Log("Entered new state");
 	};
 
 	void Update() {
@@ -41,7 +42,7 @@ public:
 			currentState->Execute(t);
 	};
 
-	State<T> GetState() {
+	State<T>* GetState() {
 		return currentState;
 	};
 

@@ -5,7 +5,7 @@
 template <class T>
 List<T>::List()
 {
-	_list = new std::list<T>();
+	_list = new std::list<T*>();
 }
 
 template <class T>

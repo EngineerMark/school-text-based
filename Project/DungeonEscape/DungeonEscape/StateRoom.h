@@ -1,15 +1,18 @@
 #pragma once
 #include "State.h"
-#include "GameProgression.h"
 #include "Game.h"
 
-class StateIntroduction: public State<Game>
+class StateRoom: public State<Game>
 {
+private:
+	Room* room;
+	int steps = 0;
 public:
 	MessageData* messages;
-	StateIntroduction(MessageData* msg);
-	~StateIntroduction();
+	StateRoom(MessageData* msg, Room* room);
+	~StateRoom();
 	void Enter(Game* game) override;
 	void Execute(Game* game) override;
 	void Exit(Game* game) override;
 };
+

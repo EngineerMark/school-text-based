@@ -5,7 +5,7 @@ template <class T>
 class List
 {
 private:
-	std::list<T>* _list;
+	std::list<T*> _list;
 	int index;
 public:
 	List();

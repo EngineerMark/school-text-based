@@ -2,6 +2,8 @@
 #include "Game.h"
 
 #include "StateIntroduction.h"
+#include "StateRoom.h"
+#include "StateGameOver.h"
 
 std::vector<State<Game>*> Game::states = std::vector<State<Game>*>();
 
@@ -16,6 +18,8 @@ Game::Game()
 	// Setting up statemachine and starting introduction
 	stateMachine = new StateMachine<Game>(this);
 	states.push_back(new StateIntroduction(messageData));
+	states.push_back(new StateRoom(messageData, &room));
+	states.push_back(new StateGameOver(messageData));
 	stateMachine->ChangeState(states[0]);
 
 }
@@ -31,8 +35,44 @@ Game::~Game()
 }
 
 void Game::Loop() {
+	Message::Send(divider);
 	// Update statemachine loop
 	stateMachine->Update();
+
+	// Check if the current state even wants to switch
+	if (stateMachine->GetState()->progressState != GAME_NONE) {
+		// States:
+		// 0: Introduction
+		// 1: Room/Dungeon gameplay
+		// 2: Game Over
+		// 3: Exit game aka GAME_EXIT
+		// Check if game is in introduction state
+		if (stateMachine->GetState() == states[0]) {
+			// Check if game resumes to next state needed
+			if (stateMachine->GetState()->progressState == GAME_CONTINUE) {
+				// progress is continue, resume to room state
+				stateMachine->ChangeState(states[1]);
+			}
+		}
+		// Game is not in introduction state, check Room state
+		else if (stateMachine->GetState() == states[1]) {
+			if (stateMachine->GetState()->progressState == GAME_OVER) {
+				stateMachine->ChangeState(states[2]);
+			}
+		}
+		// Game is in gameover mode
+		else if (stateMachine->GetState() == states[2]) {
+			if (stateMachine->GetState()->progressState == GAME_CONTINUE) {
+				stateMachine->ChangeState(states[0]);
+			}
+		}
+		// Game is exiting (state 3)
+		if (stateMachine->GetState()->progressState == GAME_EXIT) {
+			Message::Send(messageData->GetMessageTest("exit").to_str().c_str());
+			QuitGame();
+		}
+	}
+
 	/*char buffer[4096];
 	char msg[4096];
 	Message::Send(divider);
