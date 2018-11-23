@@ -1,17 +1,14 @@
 #pragma once
 #include "State.h"
+#include "GameProgression.h"
 #include "Game.h"
-#include "LookDirection.h"
 
-class StateRoom: public State<Game>
+class StateWin: public State<Game>
 {
-private:
-	Room* room;
-	int steps = 0;
 public:
 	MessageData* messages;
-	StateRoom(MessageData* msg, Room* room);
-	~StateRoom();
+	StateWin(MessageData* msg);
+	~StateWin();
 	void Enter(Game* game) override;
 	void Execute(Game* game) override;
 	void Exit(Game* game) override;

@@ -1,15 +1,16 @@
 #pragma once
 #include <string>
 #include "GameProgression.h"
+#include "LookDirection.h"
 
 template<class T> class State
 {
 public:
-	virtual void Enter(T* t) {};
+	GameProgressionStates progressState;
+	virtual void Enter(T* t) { progressState = GAME_NONE; };
 	virtual void Execute(T* t) {};
 	virtual void Exit(T* t) {};
 
-	GameProgressionStates progressState;
 
 	std::string GetUserInput() {
 		std::string input;

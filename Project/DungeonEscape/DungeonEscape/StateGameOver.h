@@ -9,7 +9,5 @@ public:
 	StateGameOver(MessageData* msg);
 	~StateGameOver();
 	void Enter(Game* game) override;
-	void Execute(Game* game) override;
-	void Exit(Game* game) override;
 };
 

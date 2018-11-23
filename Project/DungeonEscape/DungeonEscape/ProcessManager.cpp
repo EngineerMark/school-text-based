@@ -5,6 +5,7 @@
 #include <future>
 #include "ProcessManager.h"
 #include "RenderProcess.h"
+#include "List.h"
 
 typedef std::list<StrongProcessPtr> ProcessList;
 //ProcessList processList;
@@ -42,8 +43,8 @@ unsigned int ProcessManager::UpdateProcesses(float deltaTime)
 	ProcessList::iterator end = processList->end();
 	while (processList->end() != it) {
 		StrongProcessPtr p = (*it);
-		if (p->thread == NULL)
-			continue;
+		/*if (p->thread == NULL)
+			continue;*/
 
 		if (p->IsDone()) {
 			if (p->GetProcessType() == PROCESS_INPUT) {

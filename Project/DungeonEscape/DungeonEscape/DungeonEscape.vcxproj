@@ -163,23 +163,32 @@
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameProgression.h" />
     <ClInclude Include="InputProcess.h" />
+    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemKey.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="LookDirection.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="MessageData.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Process.h" />
     <ClInclude Include="ProcessManager.h" />
+    <ClInclude Include="Puzzle.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="RenderProcess.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateGameOver.h" />
     <ClInclude Include="StateIntroduction.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="StateRoom.h" />
+    <ClInclude Include="StateWin.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
@@ -188,8 +197,10 @@
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="DungeonEscape.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputProcess.cpp" />
+    <ClCompile Include="ItemKey.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="Message.cpp" />
     <ClCompile Include="MessageData.cpp" />
@@ -199,19 +210,25 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="ProcessManager.cpp" />
+    <ClCompile Include="Puzzle.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="RenderProcess.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="StateGameOver.cpp" />
     <ClCompile Include="StateIntroduction.cpp" />
     <ClCompile Include="StateRoom.cpp" />
+    <ClCompile Include="StateWin.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MessageData.json" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DungeonEscape.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -8,6 +8,8 @@ Room::Room()
 
 Room::~Room()
 {
+	SAFE_DELETE(leftPuzzle);
+	SAFE_DELETE(rightPuzzle);
 }
 
 void Room::DoorsMessage() {
@@ -26,4 +28,7 @@ void Room::RebuildRoom() {
 			possible = true;
 		}
 	}
+
+	rightPuzzle = new Puzzle();
+	leftPuzzle = new Puzzle();
 }

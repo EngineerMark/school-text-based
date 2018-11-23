@@ -44,7 +44,6 @@ void InputProcess::OnUpdate(float deltaTime)
 void InputProcess::OnInit()
 {
 	Process::OnInit();
-	game = new Game();
 	/*Function* func = OnUpdate;
 	Thread* tprocessThread = new Thread(func);*/
 	thread = new std::thread(&InputProcess::Loop,this);

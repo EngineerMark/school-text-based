@@ -16,7 +16,6 @@ public:
 		currentState = nullptr;
 		previousState = nullptr;
 	};
-
 	~StateMachine()
 	{
 		SAFE_DELETE(t);
@@ -34,7 +33,7 @@ public:
 		}
 		currentState = newState;
 		currentState->Enter(t);
-		Debug::Log("Entered new state");
+		//Debug::Log("Entered new state");
 	};
 
 	void Update() {

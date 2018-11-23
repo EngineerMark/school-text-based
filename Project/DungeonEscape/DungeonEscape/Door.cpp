@@ -11,6 +11,9 @@ Door::Door()
 	if (randomizeRoomContaining == 1) {
 		HasRoom = true;
 	}
+	else {
+		HasRoom = false;
+	}
 }
 
 

@@ -1,5 +1,6 @@
 #pragma once
 #include <thread>
+#include "Game.h"
 //#include "Thread.h"
 
 enum ProcessState {
@@ -24,6 +25,8 @@ private:
 	ProcessState state;
 	ProcessType processType;
 	//friend class ProcessManager;
+protected:
+	Game* game;
 public:
 	std::thread* thread;
 	virtual void Loop() {};
@@ -42,4 +45,8 @@ public:
 	bool IsRemoved() const { return state == STATE_REMOVED; };
 	bool IsPaused() const { return state == STATE_PAUSED; };
 	bool IsDone() const { return state == STATE_SUCCEEDED; };
+
+	void AppendGame(Game* game) {
+		this->game = game;
+	}
 };

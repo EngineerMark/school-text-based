@@ -1,13 +1,10 @@
 #pragma once
+#include "Entity.h"
 
-
-class Enemy
+class Enemy: public Entity
 {
 public:
-	int hp;
 	Enemy();
 	~Enemy();
-	void RemoveHealth(int amount);
-	int GetHealth();
 };
 

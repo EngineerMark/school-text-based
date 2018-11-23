@@ -10,9 +10,9 @@ private:
 public:
 	List();
 	~List();
-	T Begin();
-	T End();
-	T Next();
+	T* Begin();
+	T* End();
+	T* Next();
 	void Remove(T*);
 	void Add(T*);
 };

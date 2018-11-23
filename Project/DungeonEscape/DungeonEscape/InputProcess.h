@@ -3,8 +3,6 @@
 #include "Process.h"
 class InputProcess: public Process
 {
-private:
-	Game* game;
 public:
 	InputProcess();
 	~InputProcess();
