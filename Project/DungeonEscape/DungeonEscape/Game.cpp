@@ -6,6 +6,8 @@
 #include "StateGameOver.h"
 #include "StateWin.h"
 
+#include "MeshRenderer.h"
+
 std::vector<State<Game>*> Game::states = std::vector<State<Game>*>();
 
 Game::Game()
@@ -27,11 +29,21 @@ Game::Game()
 	inventory = new Inventory();
 
 	player = new Player();
+
+	/*sceneManager = new SceneManager();
+
+	Scene* introScene = sceneManager->CreateScene("IntroScene");*/
+
+	/*GameObject* test = introScene->AddGameObject(new GameObject());
+	MeshRenderer* testComponent = test->AddComponent<MeshRenderer>();
+	testComponent->SetMesh(new Mesh());
+	testComponent->GetMesh()->GenerateModelFromFile("Models/chalet.obj");*/
 }
 
 Game::~Game()
 {
 	// Deleting all (possibly) existing pointers
+	SAFE_DELETE(sceneManager);
 	SAFE_DELETE(player);
 	SAFE_DELETE(inventory);
 	SAFE_DELETE(messageData);

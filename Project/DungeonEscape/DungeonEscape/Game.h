@@ -16,6 +16,7 @@
 #include "Debug.h"
 #include "Player.h"
 #include "Inventory.h"
+#include "SceneManager.h"
 
 enum Difficulty {
 	GAME_UNSET,
@@ -37,6 +38,7 @@ private:
 	Player* player;
 	Difficulty gameDifficulty = GAME_UNSET;
 public:
+	SceneManager* sceneManager;
 	Inventory* inventory;
 	bool IsQuitting() { return Quit; };
 	void QuitGame() { Quit = true; };

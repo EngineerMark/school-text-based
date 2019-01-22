@@ -53,7 +53,7 @@ unsigned int ProcessManager::UpdateProcesses(float deltaTime)
 		}
 		else if (p->IsAlive()) {
 			p->OnUpdate(0);
-			//cout << (*it) << " updated" << endl;
+			std::cout << (*it) << " updated" << std::endl;
 		}
 		++it;
 	}

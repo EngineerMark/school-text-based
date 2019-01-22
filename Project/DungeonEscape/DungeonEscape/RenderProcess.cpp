@@ -4,8 +4,13 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
+#include "Time.h"
+
 const int WIDTH = 800;
 const int HEIGHT = 600;
+
+const std::string MODEL_PATH = "Models/chalet.obj";
+const std::string TEXTURE_PATH = "Textures/chalet.jpg";
 
 const int MAX_FRAMES_IN_FLIGHT = 2;
 
@@ -153,7 +158,7 @@ QueueFamilyIndices RenderProcess::findQueueFamilies(VkPhysicalDevice device) {
 		if (queueFamily.queueCount > 0 && queueFamily.queueFlags&VK_QUEUE_GRAPHICS_BIT) {
 			indices.graphicsFamily = i;
 		}
-		
+
 		VkBool32 presentSupport = false;
 		vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surface, &presentSupport);
 
@@ -214,6 +219,8 @@ VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>
 			return availableFormat;
 		}
 	}
+
+	return availableFormats[0];
 }
 
 VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR> availablePresentModes) {
@@ -478,7 +485,7 @@ void RenderProcess::CopyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceS
 
 void RenderProcess::CreateTextureImage() {
 	int texWidth, texHeight, texChannels;
-	stbi_uc* pixels = stbi_load("Textures/statue_example.jpg", &texWidth, &texHeight, &texChannels, STBI_rgb_alpha);
+	stbi_uc* pixels = stbi_load(TEXTURE_PATH.c_str(), &texWidth, &texHeight, &texChannels, STBI_rgb_alpha);
 	VkDeviceSize imageSize = texWidth * texHeight * 4;
 
 
@@ -489,10 +496,10 @@ void RenderProcess::CreateTextureImage() {
 	VkBuffer stagingBuffer;
 	VkDeviceMemory stagingBufferMemory;
 	CreateBuffer(
-		imageSize, 
-		VK_BUFFER_USAGE_TRANSFER_SRC_BIT, 
-		VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, 
-		stagingBuffer, 
+		imageSize,
+		VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
+		VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+		stagingBuffer,
 		stagingBufferMemory);
 
 	void* data;
@@ -510,6 +517,46 @@ void RenderProcess::CreateTextureImage() {
 	vkDestroyBuffer(device, stagingBuffer, nullptr);
 	vkFreeMemory(device, stagingBufferMemory, nullptr);
 }
+
+//void RenderProcess::LoadModel(const std::string loc, UINT16 xOffset, UINT16 yOffset, UINT16 zOffset)
+//{
+//	tinyobj::attrib_t attrib;
+//	std::vector<tinyobj::shape_t> shapes;
+//	std::vector<tinyobj::material_t> materials;
+//	std::string err;
+//
+//	if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &err, loc.c_str())) {
+//		throw std::runtime_error(err);
+//	}
+//
+//	std::unordered_map<Vertex, uint32_t> uniqueVertices = {};
+//
+//	for (const auto& shape : shapes) {
+//		for (const auto& index : shape.mesh.indices) {
+//			Vertex vertex = {};
+//
+//			vertex.pos = {
+//				attrib.vertices[3 * (index.vertex_index) + 0]+xOffset,
+//				attrib.vertices[3 * (index.vertex_index) + 1]+yOffset,
+//				attrib.vertices[3 * (index.vertex_index) + 2]+zOffset
+//			};
+//
+//			vertex.texCoord = {
+//				attrib.texcoords[2 * index.texcoord_index + 0],
+//				1.0f - attrib.texcoords[2 * index.texcoord_index + 1]
+//			};
+//
+//			vertex.color = { 1.0f, 1.0f, 1.0f };
+//
+//			if (uniqueVertices.count(vertex) == 0) {
+//				uniqueVertices[vertex] = static_cast<uint32_t>(vertices.size());
+//				vertices.push_back(vertex);
+//			}
+//
+//			indices.push_back(uniqueVertices[vertex]);
+//		}
+//	}
+//}
 
 void RenderProcess::CreateVertexBuffer() {
 	VkDeviceSize bufferSize = sizeof(vertices[0]) * vertices.size();
@@ -561,7 +608,7 @@ void RenderProcess::CreateUniformBuffers() {
 		CreateBuffer(
 			bufferSize,
 			VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
-			VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT|VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+			VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
 			uniformBuffers[i],
 			uniformBuffersMemory[i]
 		);
@@ -881,7 +928,7 @@ void RenderProcess::CreateRenderPass() {
 	VkAttachmentReference colorAttachmentRef = {};
 	colorAttachmentRef.attachment = 0;
 	colorAttachmentRef.layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
-	
+
 	VkAttachmentReference depthAttachmentRef = {};
 	depthAttachmentRef.attachment = 1;
 	depthAttachmentRef.layout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
@@ -901,7 +948,7 @@ void RenderProcess::CreateRenderPass() {
 
 	dependency.dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
 	dependency.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
-	
+
 	std::array<VkAttachmentDescription, 2> attachments = { colorAttachment, depthAttachment };
 	VkRenderPassCreateInfo renderPassInfo = {};
 	renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
@@ -1150,6 +1197,25 @@ void RenderProcess::CreateCommandBuffers() {
 		renderPassInfo.clearValueCount = static_cast<uint32_t>(clearValues.size());
 		renderPassInfo.pClearValues = clearValues.data();
 
+		/*std::vector<uint32_t> totalIndices;
+		std::vector<GameObject*> gameObjects = game->sceneManager->GetLiveScene()->gameObjects;
+
+		for (size_t i = 0; i < gameObjects.size(); i++)
+		{
+			GameObject* go = gameObjects[i];
+
+			if (go->GetComponent<MeshRenderer>()) {
+				MeshRenderer* mr = go->GetComponent<MeshRenderer>();
+				Mesh* mesh = mr->GetMesh();
+				std::vector<uint32_t> modelIndices = mesh->GetIndices();
+				for (size_t i = 0; i < modelIndices.size(); i++)
+				{
+					uint32_t _i = modelIndices[i];
+					totalIndices.push_back(_i);
+				}
+			}
+		}*/
+
 		vkCmdBeginRenderPass(commandBuffers[i], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
 
 		vkCmdBindPipeline(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline);
@@ -1158,7 +1224,7 @@ void RenderProcess::CreateCommandBuffers() {
 		VkDeviceSize offsets[] = { 0 };
 		vkCmdBindVertexBuffers(commandBuffers[i], 0, 1, vertexBuffers, offsets);
 
-		vkCmdBindIndexBuffer(commandBuffers[i], indexBuffer, 0, VK_INDEX_TYPE_UINT16);
+		vkCmdBindIndexBuffer(commandBuffers[i], indexBuffer, 0, VK_INDEX_TYPE_UINT32);
 
 		vkCmdBindDescriptorSets(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout, 0, 1, &descriptorSets[i], 0, nullptr);
 
@@ -1176,7 +1242,7 @@ void RenderProcess::CreateSyncObjects() {
 	imageAvailableSemaphores.resize(MAX_FRAMES_IN_FLIGHT);
 	renderFinishedSemaphores.resize(MAX_FRAMES_IN_FLIGHT);
 	inFlightFences.resize(MAX_FRAMES_IN_FLIGHT);
-	
+
 	VkSemaphoreCreateInfo semaphoreInfo = {};
 	semaphoreInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
 
@@ -1187,7 +1253,7 @@ void RenderProcess::CreateSyncObjects() {
 	for (size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; i++) {
 		if (vkCreateSemaphore(device, &semaphoreInfo, nullptr, &imageAvailableSemaphores[i]) != VK_SUCCESS ||
 			vkCreateSemaphore(device, &semaphoreInfo, nullptr, &renderFinishedSemaphores[i]) != VK_SUCCESS ||
-			vkCreateFence(device,&fenceInfo,nullptr,&inFlightFences[i])!=VK_SUCCESS) {
+			vkCreateFence(device, &fenceInfo, nullptr, &inFlightFences[i]) != VK_SUCCESS) {
 			throw std::runtime_error("failed to create semaphores");
 		}
 	}
@@ -1349,7 +1415,7 @@ void RenderProcess::CreateTextureSampler() {
 	samplerInfo.compareOp = VK_COMPARE_OP_ALWAYS;
 	samplerInfo.mipmapMode = VK_SAMPLER_MIPMAP_MODE_LINEAR;
 
-	if (vkCreateSampler(device,&samplerInfo,nullptr,&textureSampler)!=VK_SUCCESS) {
+	if (vkCreateSampler(device, &samplerInfo, nullptr, &textureSampler) != VK_SUCCESS) {
 		throw std::runtime_error("failed to create texture sampler");
 	}
 }
@@ -1376,10 +1442,12 @@ VkImageView RenderProcess::CreateImageView(VkImage image, VkFormat format, VkIma
 }
 
 void RenderProcess::UpdateUniformBuffer(uint32_t currentImage) {
-	static auto startTime = std::chrono::high_resolution_clock::now();
+	/*static auto startTime = std::chrono::high_resolution_clock::now();
 
 	auto currentTime = std::chrono::high_resolution_clock::now();
-	float time = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - startTime).count();
+	float time = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - startTime).count();*/
+
+	float_t time = Time::GetStartTime();
 
 	UniformBufferObject ubo = {};
 	ubo.model = glm::rotate(glm::mat4(1.0f), time * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
@@ -1477,7 +1545,7 @@ void RenderProcess::cleanup() {
 		vkDestroyBuffer(device, uniformBuffers[i], nullptr);
 		vkFreeMemory(device, uniformBuffersMemory[i], nullptr);
 	}
-	
+
 	vkDestroyBuffer(device, indexBuffer, nullptr);
 	vkFreeMemory(device, indexBufferMemory, nullptr);
 
@@ -1545,17 +1613,17 @@ void RenderProcess::Loop() {
 	initWindow();
 	initVulkan();
 	while (IsAlive()) {
-		if (IsPaused())
+		/*if (IsPaused())
 			continue;
 		if (IsDead())
-			break;
+			break;*/
 
 		//std::cout << "RenderProcess" << std::endl;
 		loop();
 
 
-		if (GetState() == STATE_SUCCEEDED)
-			break;
+		/*if (GetState() == STATE_SUCCEEDED)
+			break;*/
 	}
 	vkDeviceWaitIdle(device);
 	SetState(STATE_SUCCEEDED);
@@ -1576,7 +1644,7 @@ void RenderProcess::OnInit()
 		//Loop();
 		//initWindow();
 		//initVulkan();
-		thread = new std::thread(&RenderProcess::Loop, this);
+		thread = new std::thread(&RenderProcess::Loop,this);
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << std::endl;
