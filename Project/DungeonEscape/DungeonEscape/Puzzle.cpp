@@ -11,7 +11,3 @@ Puzzle::Puzzle()
 Puzzle::~Puzzle()
 {
 }
-
-void Puzzle::VisualizePuzzle() {
-
-}

@@ -13,7 +13,6 @@ private:
 public:
 	Puzzle();
 	~Puzzle();
-	void VisualizePuzzle();
 	//void GrabKey(Inventory* inv);
 };
 
