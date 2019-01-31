@@ -20,15 +20,16 @@ void Room::RebuildRoom() {
 	possible = false;
 	doors = std::vector<Door>();
 	int doorAmount = Random::RandomInt(3) + 2;
+	rightPuzzle = new Puzzle();
+	leftPuzzle = new Puzzle();
 	for (int i = 0; i < doorAmount; i++)
 	{
 		Door door;
 		doors.push_back(door);
 		if (door.HasRoom) {
 			possible = true;
+			leftPuzzle->GenerateEquation(i);
 		}
 	}
 
-	rightPuzzle = new Puzzle();
-	leftPuzzle = new Puzzle();
 }

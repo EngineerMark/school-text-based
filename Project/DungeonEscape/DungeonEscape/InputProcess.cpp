@@ -1,8 +1,5 @@
 #include "pch.h"
-#include <iostream>
 #include "InputProcess.h"
-#include "Process.h"
-#include "Debug.h"
 
 InputProcess::InputProcess()
 {

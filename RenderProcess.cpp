@@ -1566,7 +1566,7 @@ void RenderProcess::OnUpdate(float deltaTime)
 {
 	SetState(STATE_RUNNING);
 	//Debug::Log("render thread");
-	loop();
+	//loop();
 }
 
 void RenderProcess::OnInit()
@@ -1574,9 +1574,9 @@ void RenderProcess::OnInit()
 	Process::OnInit();
 	try {
 		//Loop();
-		initWindow();
-		initVulkan();
-		//thread = new std::thread(&RenderProcess::Loop, this);
+		//initWindow();
+		//initVulkan();
+		thread = new std::thread(&RenderProcess::Loop, this);
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << std::endl;

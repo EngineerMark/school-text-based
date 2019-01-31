@@ -54,7 +54,7 @@ Game::~Game()
 }
 
 void Game::Loop() {
-	//Message::Send(divider);
+	Message::Send(divider);
 	// Update statemachine loop
 	stateMachine->Update();
 

@@ -2,7 +2,6 @@
 #include <vector>
 #include <iostream>
 #include "Door.h"
-//#include "Enemy.h"
 #include "Random.h"
 #include "Message.h"
 #include "Puzzle.h"
@@ -16,10 +15,12 @@ private:
 public:
 	Room();
 	~Room();
-	//Enemy roomEnemy;
 	std::vector<Door> doors;
 	void DoorsMessage();
 	void RebuildRoom();
 	bool HasRoom() { return possible; };
+
+	Puzzle* GetLeftPuzzle() { return leftPuzzle; };
+	Puzzle* GetRightPuzzle() { return rightPuzzle; };
 };
 

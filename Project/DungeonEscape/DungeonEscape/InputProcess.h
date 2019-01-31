@@ -1,6 +1,8 @@
 #pragma once
+#include <iostream>
 #include "Game.h"
 #include "Process.h"
+#include "Debug.h"
 class InputProcess: public Process
 {
 public:

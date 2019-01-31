@@ -53,11 +53,25 @@ void StateRoom::Execute(Game* game)
 			game->GetPlayer()->SetLookDirection(LDIR_LEFT);
 			Message::Send("You are now looking to the left.");
 			// Send puzzle-left msg
+			if (room->GetLeftPuzzle()) {
+				Message::Send("This side gives you an question to solve:");
+				Message::Send(room->GetLeftPuzzle()->Equation());
+				Message::Send("Use the answer of this question on the corresponding door");
+			}
+			else {
+				Message::Send("There is nothing of use");
+			}
 		}
 		else if (input == "look right") {
 			game->GetPlayer()->SetLookDirection(LDIR_RIGHT);
 			Message::Send("You are now looking to the right.");
 			// Send puzzle-right msg
+			if (room->GetRightPuzzle()) {
+
+			}
+			else {
+				Message::Send("There is nothing of use");
+			}
 		}
 		else if (input == "look at doors") {
 			game->GetPlayer()->SetLookDirection(LDIR_FORWARD);
