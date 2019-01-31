@@ -150,6 +150,9 @@
     <ClInclude Include="Material.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="AudioProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -235,6 +238,9 @@
     </ClCompile>
     <ClCompile Include="Material.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioProcess.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
