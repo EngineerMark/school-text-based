@@ -153,6 +153,12 @@
     <ClInclude Include="AudioProcess.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="common_platform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -240,6 +246,12 @@
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="AudioProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="common.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="common_platform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
