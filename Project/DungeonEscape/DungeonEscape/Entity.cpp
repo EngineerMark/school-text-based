@@ -4,6 +4,7 @@
 
 Entity::Entity()
 {
+	health = 100;
 }
 
 

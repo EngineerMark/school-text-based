@@ -4,19 +4,22 @@
 #include <map>
 #include <list>
 #include <iostream>
+#include <atomic>
+
+#include "Random.h"
 
 enum PuzzleType {
 	PTYPE_MATH
 };
 
-//std::map<int, std::list<std::string>> puzzles = {
-//	{1,{"1*20+5*0"}},
-//	{2,{"(5*10+10)"}},
-//	{3,{"15/3-2"}},
-//	{4,{"(8*2+4)/5"}},
-//	{5,{"1+2+3-1"}},
-//	{6,{"3*2"}}
-//};
+static std::map<int, std::list<std::string>> puzzles = {
+	{1,{"1*20+5*0"}},
+	{2,{"(5*10+10)"}},
+	{3,{"15/3-2"}},
+	{4,{"(8*2+4)/5"}},
+	{5,{"1+2+3-1"}},
+	{6,{"3*2"}}
+};
 
 class Puzzle
 {
@@ -27,5 +30,7 @@ public:
 	Puzzle();
 	~Puzzle();
 	void GenerateEquation(float res);
-	std::string Equation() { return equation; };
+	std::string Equation() {
+		return equation.data();
+	}
 };

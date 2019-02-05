@@ -1,10 +1,10 @@
 #pragma once
-//#include "Entity.h"
+#include "Entity.h"
 
-//class Enemy: public Entity
-//{
-//public:
-//	Enemy();
-//	~Enemy();
-//};
-//
+class Enemy: public Entity
+{
+public:
+	Enemy();
+	~Enemy();
+};
+

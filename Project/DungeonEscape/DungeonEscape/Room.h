@@ -5,6 +5,7 @@
 #include "Random.h"
 #include "Message.h"
 #include "Puzzle.h"
+#include "Enemy.h"
 
 class Room
 {
@@ -12,6 +13,7 @@ private:
 	bool possible = false;
 	Puzzle* leftPuzzle;
 	Puzzle* rightPuzzle;
+	Enemy* enemy = NULL;
 public:
 	Room();
 	~Room();
@@ -22,5 +24,6 @@ public:
 
 	Puzzle* GetLeftPuzzle() { return leftPuzzle; };
 	Puzzle* GetRightPuzzle() { return rightPuzzle; };
+	Enemy* GetEnemy() { return enemy; };
 };
 

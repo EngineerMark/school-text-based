@@ -1,5 +1,4 @@
 #pragma once
-#include "Room.h"
 #include "LookDirection.h"
 
 class Entity
@@ -7,7 +6,6 @@ class Entity
 protected:
 	LookDirection lookDirection;
 	int health;
-	Room* location;
 public:
 	Entity();
 	~Entity();
@@ -18,14 +16,6 @@ public:
 
 	int GetHealth() {
 		return health;
-	}
-
-	void SetRoom(Room* room) {
-		this->location = room;
-	}
-
-	Room* GetRoom() {
-		return location;
 	}
 };
 
