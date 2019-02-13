@@ -103,7 +103,7 @@ int rateDeviceSuitability(VkPhysicalDevice device) {
 		return 0;
 	}
 
-	std::cout << "GPU: " << deviceProperties.deviceName << ", score: " << score << std::endl;
+	//std::cout << "GPU: " << deviceProperties.deviceName << ", score: " << score << std::endl;
 
 	return score;
 }

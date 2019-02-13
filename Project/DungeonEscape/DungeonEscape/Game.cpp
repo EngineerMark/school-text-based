@@ -7,6 +7,7 @@
 #include "StateWin.h"
 
 #include "MeshRenderer.h"
+#include "Terrain.h"
 
 std::vector<State<Game>*> Game::states = std::vector<State<Game>*>();
 SceneManager* Game::sceneManager = new SceneManager();
@@ -30,6 +31,15 @@ Game::Game()
 	inventory = new Inventory();
 
 	player = new Player();
+
+	Scene scene;
+
+	GameObject* go = new GameObject();
+	scene.AddGameObject(go);
+
+	Terrain* terrain = new Terrain(30,30);
+
+	go->AddComponent(dynamic_cast<Component*>(terrain));
 
 
 	Game::GetSceneManager()->LoadScene("level");

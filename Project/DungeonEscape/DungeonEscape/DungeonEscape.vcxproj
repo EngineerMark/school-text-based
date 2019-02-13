@@ -246,7 +246,6 @@
     <ClCompile Include="StateIntroduction.cpp" />
     <ClCompile Include="StateRoom.cpp" />
     <ClCompile Include="StateWin.cpp" />
-    <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Window.cpp" />
