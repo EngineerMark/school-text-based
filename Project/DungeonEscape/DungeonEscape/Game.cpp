@@ -9,6 +9,7 @@
 #include "MeshRenderer.h"
 
 std::vector<State<Game>*> Game::states = std::vector<State<Game>*>();
+SceneManager* Game::sceneManager = new SceneManager();
 
 Game::Game()
 {
@@ -30,6 +31,8 @@ Game::Game()
 
 	player = new Player();
 
+
+	Game::GetSceneManager()->LoadScene("level");
 	/*sceneManager = new SceneManager();
 
 	Scene* introScene = sceneManager->CreateScene("IntroScene");*/
@@ -43,11 +46,11 @@ Game::Game()
 Game::~Game()
 {
 	// Deleting all (possibly) existing pointers
-	SAFE_DELETE(sceneManager);
+	//SAFE_DELETE(sceneManager);
 	SAFE_DELETE(player);
 	SAFE_DELETE(inventory);
 	SAFE_DELETE(messageData);
-	for (int i = 0; i < states.size(); i++)
+	for (size_t i = 0; i < states.size(); i++)
 		SAFE_DELETE(states[i]);
 	states.clear();
 	SAFE_DELETE(stateMachine);

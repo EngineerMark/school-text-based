@@ -37,8 +37,8 @@ private:
 	int currentPosition = 0;
 	Player* player;
 	Difficulty gameDifficulty = GAME_UNSET;
+	static SceneManager* sceneManager;
 public:
-	SceneManager* sceneManager;
 	Inventory* inventory;
 	bool IsQuitting() { return Quit; };
 	void QuitGame() { Quit = true; };
@@ -48,6 +48,10 @@ public:
 	Room room;
 	void SetPlayer(Player* player) { this->player = player; };
 	Player* GetPlayer() { return player; };
+
+	static SceneManager* GetSceneManager() {
+		return sceneManager;
+	};
 
 	void SetDifficulty(Difficulty difficulty) { 
 		this->gameDifficulty = difficulty;
@@ -77,4 +81,3 @@ public:
 		currentPosition = 0;
 	}
 };
-

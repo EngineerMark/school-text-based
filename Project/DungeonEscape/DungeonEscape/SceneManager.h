@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 #include <vector>
-
 #include "Scene.h"
 
 typedef std::vector<Scene*> SceneList;

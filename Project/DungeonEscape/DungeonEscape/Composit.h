@@ -30,6 +30,11 @@ public:
 		return t;
 	}
 
+	Component* AddComponent(Component* component) {
+		components.push_back(component);
+		return component;
+	}
+
 	template <class T>
 	T* GetComponent() {
 		if (!std::is_base_of<Component, T>::value)

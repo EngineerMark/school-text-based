@@ -4,6 +4,7 @@ class Scene
 {
 private:
 	std::string name;
+	GameObject root;
 public:
 	std::vector<GameObject*> gameObjects;
 	Scene();
@@ -13,9 +14,8 @@ public:
 		return gameObjects;
 	};*/
 
-	GameObject* AddGameObject(GameObject* go) {
-		gameObjects.push_back(go);
-		return go;
+	void AddGameObject(GameObject* go) {
+		root.AddComponent(dynamic_cast<Component*>(go));
 	}
 
 
