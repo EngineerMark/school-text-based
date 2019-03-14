@@ -478,7 +478,7 @@ void RenderProcess::CopyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceS
 
 void RenderProcess::CreateTextureImage() {
 	int texWidth, texHeight, texChannels;
-	stbi_uc* pixels = stbi_load("Textures/unidi.png", &texWidth, &texHeight, &texChannels, STBI_rgb_alpha);
+	stbi_uc* pixels = stbi_load("Textures/statue_example.jpg", &texWidth, &texHeight, &texChannels, STBI_rgb_alpha);
 	VkDeviceSize imageSize = texWidth * texHeight * 4;
 
 
@@ -1550,8 +1550,9 @@ void RenderProcess::Loop() {
 		if (IsDead())
 			break;
 
-		//std::cout << "RenderProcess" << std::endl;
 		loop();
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(25));
 
 
 		if (GetState() == STATE_SUCCEEDED)

@@ -37,12 +37,13 @@ Game::Game()
 	GameObject* go = new GameObject();
 	scene.AddGameObject(go);
 
-	Terrain* terrain = new Terrain(30,30);
+	//Terrain* terrain = new Terrain(50,50);
 
-	go->AddComponent(dynamic_cast<Component*>(terrain));
+	//go->AddComponent(dynamic_cast<Component*>(terrain));
 
 
 	Game::GetSceneManager()->LoadScene("level");
+
 	/*sceneManager = new SceneManager();
 
 	Scene* introScene = sceneManager->CreateScene("IntroScene");*/

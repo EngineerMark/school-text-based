@@ -15,4 +15,8 @@ public:
 	GameObject() {
 		transform = AddComponent<Transform>();
 	};
+
+	std::string GetName() {
+		return name;
+	}
 };

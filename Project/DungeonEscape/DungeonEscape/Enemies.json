@@ -1,0 +1,18 @@
+{
+  "Skeleton": {
+    "health": 20,
+    "attack": "Skeleton slammed you with a bone",
+    "deathmessage": "The skeleton fell and became a hump of bones"
+  },
+  "Skeleton Boss": {
+    "parent": "Skeleton",
+    "health": 100,
+    "attack": "Skeleton boss smashed you with multiple bones",
+    "deathmessage": "The skeleton boss fell and became a mountain of bones"
+  },
+  "Cave Dweller": {
+    "health": 10,
+    "attack": "The cave dweller threw rocks at you",
+    "deathmessage": "The cave dweller fell down and became part of the cave. Dead."
+  }
+}

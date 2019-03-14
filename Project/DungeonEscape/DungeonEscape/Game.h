@@ -39,6 +39,7 @@ private:
 	Difficulty gameDifficulty = GAME_UNSET;
 	static SceneManager* sceneManager;
 public:
+	Breed* skeleton = new Breed(20,"Attack");
 	Inventory* inventory;
 	bool IsQuitting() { return Quit; };
 	void QuitGame() { Quit = true; };

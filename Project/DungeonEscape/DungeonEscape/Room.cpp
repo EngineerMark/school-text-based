@@ -44,7 +44,7 @@ void Room::RebuildRoom() {
 	}
 
 	if (spawnEnemy) {
-		enemy = new Enemy();
+		enemy = NULL;
 	}
 	else {
 		if (enemy != NULL)

@@ -164,6 +164,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AudioProcess.h" />
+    <ClInclude Include="Breed.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="common_platform.h" />
     <ClInclude Include="Component.h" />
@@ -216,10 +217,10 @@
     <ClCompile Include="AudioProcess.cpp" />
     <ClCompile Include="common.cpp" />
     <ClCompile Include="common_platform.cpp" />
+    <ClCompile Include="Component.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="DungeonEscape.cpp" />
-    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputProcess.cpp" />

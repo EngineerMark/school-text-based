@@ -4,6 +4,7 @@
 #include "Component.h"
 #include "Tile.h"
 #include "Random.h"
+#include "ConsoleColor.h"
 
 class Terrain : public Component
 {
@@ -18,20 +19,21 @@ public:
 	Tile* rockTile;
 	Tile* waterTile;
 	void GenerateTerrain() {
-		grassTile = new Tile(1, true, '@');
-		rockTile = new Tile(1, true, '#');
-		waterTile = new Tile(1, true, '~');
+		grassTile = new Tile(1, true, "\033[42m  \033[40m");
+		rockTile = new Tile(1, true, "\033[47m  \033[40m");
+		waterTile = new Tile(1, true, "\033[44m  \033[40m");
 
-		for (size_t x = 0; x < width; x++)
+		for (size_t x = 0; x < (size_t)width; x++)
 		{
-			for (size_t y = 0; y < height; y++)
+			for (size_t y = 0; y < (size_t)height; y++)
 			{
-				int rand = Random::RandomInt(3);
-				if (rand == 1) {
-					tiles[x][y] = (*grassTile);
-				}
-				else if(rand==2){
+				float val = Random::RandomInt(200)/100.0f;
+				//std::cout << val << std::endl;
+				if (val > 0.3 && val < 0.4) {
 					tiles[x][y] = (*rockTile);
+				}
+				else if (val >= 0.4) {
+					tiles[x][y] = (*grassTile);
 				}
 				else {
 					tiles[x][y] = (*waterTile);
@@ -39,11 +41,11 @@ public:
 			}
 		}
 
-		for (size_t x = 0; x < width; x++)
+		for (size_t x = 0; x < (size_t)width; x++)
 		{
-			for (size_t y = 0; y < height; y++)
+			for (size_t y = 0; y < (size_t)height; y++)
 			{
-				std::cout << tiles[x][y].terrainType<<" ";
+				std::cout << tiles[x][y].terrainType << "";
 			}
 			std::cout << std::endl;
 		}

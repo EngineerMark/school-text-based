@@ -2,16 +2,17 @@
 
 class Component
 {
+private:
+	int instanceID;
 public:
-	Component() {
+	Component();
+	~Component();
 
-	};
-	~Component(){
+	static int ID;
 
-	};
+	virtual void Update() {};
 
-	virtual void Update(){
-
-	};
+	int GetInstanceID() {
+		return ID;
+	}
 };
-

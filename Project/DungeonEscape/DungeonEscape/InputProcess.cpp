@@ -19,12 +19,6 @@ void InputProcess::Loop() {
 		if (IsDead())
 			break;
 
-		//char buffer[100];
-		////std::cout << "InputProcess" << std::endl;
-
-		//std::cin >> buffer;
-
-		//std::cout << buffer << " - WOW WORKS!" << std::endl;
 		game->Loop();
 		if (game->IsQuitting() || GetState()==STATE_SUCCEEDED)
 			break;
@@ -41,15 +35,12 @@ void InputProcess::OnUpdate(float deltaTime)
 void InputProcess::OnInit()
 {
 	Process::OnInit();
-	/*Function* func = OnUpdate;
-	Thread* tprocessThread = new Thread(func);*/
 	try {
 		thread = new std::thread(&InputProcess::Loop, this);
 	}
 	catch (const std::exception& err) {
 		std::cerr << err.what() << std::endl;
 		OnAbort();
-		//return EXIT_FAILURE;
 		return;
 	}
 
